@@ -1,5 +1,5 @@
 
-<form method="POST" action="receipt.php">
+<form method="POST" action="modules/receipt.php">
 
 	firstName:	<input type="text" name="fname" required>
 	lastName:	<input type="text" name="lname" required>
