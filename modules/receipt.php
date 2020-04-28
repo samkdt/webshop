@@ -1,7 +1,7 @@
 <?PHP
 	function folder() {
 		$date = date("F:Y");
-		$dir = "./orders/".$date;
+		$dir = "../orders/".$date;
 		if (!file_exists($dir)){
 			mkdir($dir, 0777, true);
 		}
@@ -10,7 +10,7 @@
 
 	function updateopd(){
 		
-		$yeet = "./orders/opd.txt";
+		$yeet = "../orders/opd.txt";
 		$hej = fopen($yeet,"a") or die("nåt snea, du ör för smallbrain");
 		fwrite($hej,"\nenmindrekvar");
 		fclose($hej);
