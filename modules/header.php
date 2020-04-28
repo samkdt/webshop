@@ -1,0 +1,5 @@
+<?PHP
+
+	echo "<h1>VÄLKOMMEN ".$_SERVER['REMOTE_ADDR'].", TILL SAMS WEBBSHOP</h1>";
+
+?>
