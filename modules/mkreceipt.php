@@ -1,6 +1,6 @@
 <?PHP
 
-	function makereceipt($dir,$orderid,$customeremail,$size,$customername,$price){
+	function makereceipt($dir,$orderid,$ordernr,$customeremail,$size,$customername,$price){
 		$dir .= "kvitton/";
 		if(!file_exists($dir)){
 			mkdir($dir);
@@ -19,7 +19,7 @@
 			"*********************************\n".
 			"Glöm inte swisha pris till nr Med ditt ordernummer!\n".
 			"skriv till samkdt99@gmail.com vid frågor";
-		$kvitto = fopen($dir.$orderid.".txt","w") or die("walla error");
+		$kvitto = fopen($dir.$ordernr.".txt","w") or die("walla error");
 		fwrite($kvitto, $txt);
 		fclose($kvitto);
 		

@@ -3,7 +3,7 @@
 	
 	function folder() {
 		$date = date("F:Y");
-		$dir = "../orders/".$date;
+		$dir = "../orders";
 		if (!file_exists($dir)){
 			mkdir($dir, 0777, true);
 		}
@@ -24,22 +24,23 @@
 		$time = date("d/H:i");
 		$dir = folder();
 		$customername = $name." ".$lname;
-		$file = $dir."/orders.csv";
+		$file = $dir."/order.csv";
 		if (!file_exists($file)){
 			$orderinit = fopen($file,"w") or die("something snea");
-			$categorys = "order,namn,berställning,epost,ip,tid,status";
+			$categorys = "order,ordernr,namn,berställning,epost,ip,tid,status";
 			fwrite($orderinit, $categorys);
 			fclose($orderinit);
 		}
 		$orderid = exec("wc -l < $file")+1;
+		$ordernr = hash("tiger192,3",$orderid);
 		$order = fopen($file, "a") or die("Unable to open file!");
-		$txt = "\n".$orderid.",".$customername.",".$size . ",".$email."," . $ip.",".$time.",pending";
+		$txt = "\n".$orderid.",".$ordernr.",".$customername.",".$size . ",".$email."," . $ip.",".$time.",pending";
 	
 		fwrite($order, $txt);
 		fclose($order);
-		makereceipt("../orders/",$orderid,$email,$size,$customername,"150");
+		makereceipt("../orders/",$orderid,$ordernr,$email,$size,$customername,"150");
 		updateopd();
-		header("LOCATION: showreceipt.php?k=".$orderid);
+		header("LOCATION: showreceipt.php?k=".$ordernr);
 	}	
 
 		$name = $_POST["fname"];
