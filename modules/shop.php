@@ -22,12 +22,12 @@ checkopd();
 			if (exec(" wc -l < $yeet") > 4){
 				echo "DU KOM FÖRSENT, FÖRSÖk IGEN IMORGON";
 			} else {
-				include "form.php";
+				include "form.html";
 			}
 
 		} else {
 			mkopd();
-			include "form.php";
+			include "form.html";
 		}
 
 	

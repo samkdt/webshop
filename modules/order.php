@@ -17,7 +17,7 @@
 
 	}
 	
-	function mkorder($name,$lname,$order,$email){
+	function mkorder($name,$lname,$size,$email){
 		$ip =  $_SERVER['REMOTE_ADDR'];
 		$time = date("d/H:i");
 		$dir = folder();
@@ -42,6 +42,6 @@
 		$lname = $_POST["lname"];
 		$email = $_POST["email"];
 		$size = $_POST["size"];
-		mkorder($name,$lname,$order,$email);
+		mkorder($name,$lname,$size,$email);
 
 ?>
