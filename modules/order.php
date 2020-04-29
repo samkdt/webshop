@@ -1,4 +1,6 @@
 <?PHP
+	include "mkreceipt.php";
+	
 	function folder() {
 		$date = date("F:Y");
 		$dir = "../orders/".$date;
@@ -7,7 +9,7 @@
 		}
 		return $dir;
 	}
-
+	
 	function updateopd(){
 		
 		$yeet = "../orders/opd.txt";
@@ -21,6 +23,7 @@
 		$ip =  $_SERVER['REMOTE_ADDR'];
 		$time = date("d/H:i");
 		$dir = folder();
+		$customername = $name." ".$lname;
 		$file = $dir."/orders.csv";
 		if (!file_exists($file)){
 			$orderinit = fopen($file,"w") or die("something snea");
@@ -30,12 +33,13 @@
 		}
 		$orderid = exec("wc -l < $file")+1;
 		$order = fopen($file, "a") or die("Unable to open file!");
-		$txt = "\n".$orderid.",".$name." ".$lname.",".$size . ",".$email."," . $ip.",".$time.",pending";
+		$txt = "\n".$orderid.",".$customername.",".$size . ",".$email."," . $ip.",".$time.",pending";
 	
 		fwrite($order, $txt);
 		fclose($order);
+		makereceipt("../orders/",$orderid,$email,$size,$customername,"150");
 		updateopd();
-		echo "Beställning gjord, kolla din epost för kvitto glöm inte betala";
+		header("LOCATION: ../orders/kvitton/".$orderid.".txt");
 	}	
 
 		$name = $_POST["fname"];

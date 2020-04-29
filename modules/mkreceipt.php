@@ -1,26 +1,29 @@
 <?PHP
 
-	function sendreceipt($customeremail){
-		
-		$to = $customeremail;
-		$subject = "Betalning";
-		$txt = "Tack för ditt köp";
-
-		$headers = "MIME-Version: 1.0" . "\r\n";
-		$headers .= "Content-type:text;charset=UTF-8" . "\r\n";
-		$headers .= "From: samkdt99@gmail.com" . "\r\n" .
-		"CC: somebodyelse@example.com";
-
-		$mail = mail($to,$subject,$txt,$headers);
-		
-		if($mail){
-			echo "beställning gick igenom";
-		} else {
-			echo "nånting snea";
+	function makereceipt($dir,$orderid,$customeremail,$size,$customername,$price){
+		$dir .= "kvitton/";
+		if(!file_exists($dir)){
+			mkdir($dir);
 		}
+
+		date_default_timezone_set("Europe/Stockholm");
+		$txt =	"*********************************\n". 
+			"ordernummer:".$orderid ."\n".
+			"Datum:".date("d/m-Y")."\n".
+			"klockan".date("H:i:s")."\n".
+			"*********************************\n".
+			"Tack ".$customername." för din beställning!\n".
+			"Kundens epost: ".$customeremail."\n".
+			"beställing: ".$size."\n".
+			"pris: ".$price."kr\n".
+			"*********************************\n".
+			"Glöm inte swisha pris till nr Med ditt ordernummer!\n".
+			"skriv till samkdt99@gmail.com vid frågor";
+		$kvitto = fopen($dir.$orderid.".txt","w") or die("walla error");
+		fwrite($kvitto, $txt);
+		fclose($kvitto);
 		
 	}
 	
-	sendreceipt("neo.leijondahl@gmail.com");
 
 ?>
