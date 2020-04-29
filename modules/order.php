@@ -39,7 +39,7 @@
 		fclose($order);
 		makereceipt("../orders/",$orderid,$email,$size,$customername,"150");
 		updateopd();
-		header("LOCATION: ../orders/kvitton/".$orderid.".txt");
+		header("LOCATION: showreceipt.php?k=".$orderid);
 	}	
 
 		$name = $_POST["fname"];

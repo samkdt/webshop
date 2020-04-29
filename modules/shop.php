@@ -19,7 +19,7 @@ checkopd();
 			mkopd();
 			}			
 	
-			if (exec(" wc -l < $yeet") > 4){
+			if (exec(" wc -l < $yeet") > 400){
 				echo "DU KOM FÖRSENT, FÖRSÖk IGEN IMORGON";
 			} else {
 				include "form.html";
