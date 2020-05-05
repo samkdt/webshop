@@ -24,17 +24,19 @@
 		$time = date("d/H:i");
 		$dir = folder();
 		$customername = $name." ".$lname;
+		$salt = random_bytes(10);
+		$pepper = "yolo";
 		$file = $dir."/order.csv";
 		if (!file_exists($file)){
 			$orderinit = fopen($file,"w") or die("something snea");
-			$categorys = "order,ordernr,namn,berställning,epost,ip,tid,status";
+			$categorys = "'order','ordernr','salt','namn','berställning','epost','ip','tid','status'";
 			fwrite($orderinit, $categorys);
 			fclose($orderinit);
 		}
 		$orderid = exec("wc -l < $file")+1;
-		$ordernr = hash("tiger192,3",$orderid);
+		$ordernr = hash("tiger192,3",$orderid . $salt . $pepper);
 		$order = fopen($file, "a") or die("Unable to open file!");
-		$txt = "\n".$orderid.",".$ordernr.",".$customername.",".$size . ",".$email."," . $ip.",".$time.",pending";
+		$txt = "\n'".$orderid."','".$ordernr."','".$salt."','".$customername."','".$size . "','".$email."','" . $ip."','".$time."','pending'";
 	
 		fwrite($order, $txt);
 		fclose($order);
