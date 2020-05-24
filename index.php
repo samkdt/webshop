@@ -4,8 +4,10 @@
 	<title>yeee</title>
 </head>
 	<?PHP
-
+		$index = true;
 		include 'modules/header.php';
-		include 'modules/shop.php';
+		include 'cart.php';
+		include 'modules/item.php';
+#		include 'modules/shop.php';
 	?>
 </html>
